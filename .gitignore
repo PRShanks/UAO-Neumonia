@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+# Archivos generados por Python
+__pycache__/
+*.pyc
+
+# Entorno virtual
+mi_entorno/
+venv/
+
+# Archivos sensibles / configuración local
+.env
+config.py
