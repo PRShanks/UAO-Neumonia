@@ -138,3 +138,7 @@ venv/
 # Archivos sensibles / configuración local
 .env
 config.py
+# Modelos entrenados (Deep Learning)
+conv.MLP_84.h5
+WilhemNet86.h5
+*.h5
