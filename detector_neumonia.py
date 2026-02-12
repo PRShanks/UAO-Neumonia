@@ -8,23 +8,37 @@ from tkinter.messagebox import askokcancel, showinfo, WARNING
 import getpass
 from PIL import ImageTk, Image
 import csv
-import pyautogui
-import tkcap
-import img2pdf
+try:
+    import pyautogui
+except ImportError:
+    pyautogui = None
+try:
+    import tkcap
+except ImportError:
+    tkcap = None
+try:
+    import img2pdf
+except ImportError:
+    img2pdf = None
 import numpy as np
 import time
-import tensorflow as tf
+
 import tensorflow as tf
 K = tf.keras.backend
 import pydicom as dicom 
 tf.compat.v1.disable_eager_execution()
 tf.compat.v1.experimental.output_all_intermediates(True)
 import cv2
+import os
+
 def model_fun():
-    # Cargar el modelo una sola vez (para no recargarlo cada vez que presionas "Predecir")
+    
     if not hasattr(model_fun, "model"):
-        model_fun.model = tf.keras.models.load_model("models/conv_MLP_84.h5")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(base_dir, "models", "conv_MLP_84.h5")
+        model_fun.model = tf.keras.models.load_model(model_path)
     return model_fun.model
+
 
 
 

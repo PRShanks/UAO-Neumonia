@@ -1,0 +1,10 @@
+{
+  
+  "python.defaultInterpreterPath": "${workspaceFolder}\\mi_entorno\\Scripts\\python.exe",
+  "python.testing.pytestArgs": [
+    "tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  
+}
