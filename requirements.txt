@@ -1,11 +1,11 @@
-
-pillow
-tkcap
-pydicom
-img2pdf
-opencv-python==4.7.0.72
-matplotlib
-pandas
+numpy==1.26.4
 tensorflow==2.10.1
 
+pillow
+
+pydicom
+
+matplotlib
+opencv-python-headless==4.7.0.72
 pytest
+
