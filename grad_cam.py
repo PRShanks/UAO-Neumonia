@@ -1,9 +1,25 @@
+"""Módulo de explicabilidad con Grad-CAM (Gradient-weighted Class Activation Mapping).
+
+Implementa la técnica Grad-CAM para generar mapas de calor que visualizan
+las regiones de la imagen que el modelo considera para su predicción.
+"""
+
 import cv2
 import numpy as np
 import tensorflow as tf
 
 
 def grad_cam(array, model, last_conv_layer_name: str = "conv10_thisone"):
+    """Genera un mapa de calor Grad-CAM para explicar predicciones del modelo.
+    
+    Args:
+        array: Imagen de entrada (numpy array)
+        model: Modelo Keras/TensorFlow entrenado
+        last_conv_layer_name (str): Nombre de la última capa convolucional
+    
+    Returns:
+        numpy array: Imagen con mapa de calor superpuesto (BGR)
+    """
     # prepare image batch
     from preprocess_img import preprocess
 

@@ -99,6 +99,66 @@ Es una técnica utilizada para resaltar las regiones de una imagen que son impor
 
 Grad-CAM realiza el cálculo del gradiente de la salida correspondiente a la clase a visualizar con respecto a las neuronas de una cierta capa de la CNN. Esto permite tener información de la importancia de cada neurona en el proceso de decisión de esa clase en particular. Una vez obtenidos estos pesos, se realiza una combinación lineal entre el mapa de activaciones de la capa y los pesos, de esta manera, se captura la importancia del mapa de activaciones para la clase en particular y se ve reflejado en la imagen de entrada como un mapa de calor con intensidades más altas en aquellas regiones relevantes para la red con las que clasificó la imagen en cierta categoría.
 
+## Diagrama de flujo
+
+
+┌─────────────────┐
+│IMAGEN DICOM/JPG │
+└────────┬────────┘
+         │
+         ▼
+┌────────────────────────────────┐
+│  read_img.py                   │
+│  - Lectura de formato DICOM/JPG│
+│  - Conversión a array numpy    │
+└────────┬───────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│  preprocess_img.py           │
+│  - Resize (512x512)          │
+│  - Escala de grises          │
+│  - CLAHE                     │
+│  - Normalización (0-1)       │
+│  - Conversión a tensor       │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│  load_model.py               │
+│  - Carga WilhemNet86.h5      │
+│  - Validación del modelo     │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│  Predicción de Clase         │
+│  - Inferencia en el modelo   │
+│  - Obtención de probabilidad │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│  grad_cam.py                 │
+│  - Cálculo de gradientes     │
+│  - Generación de heatmap     │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│  integrator.py               │
+│  - Unificación de resultados │
+│  - Retorno de salidas        │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│   RESULTADO FINAL            │
+│  - Clase predicha            │
+│  - Probabilidad              │
+│  - Mapa de calor (Heatmap)   │
+└──────────────────────────────┘
+
 ## Proyecto original realizado por:
 
 Isabella Torres Revelo - https://github.com/isa-tr
